@@ -7,9 +7,10 @@ variables:
 
 stages:
   - build
+  - test
   - release
   - deploy
-  - test
+
 include:
   - template: Security/SAST.gitlab-ci.yml
 
@@ -42,9 +43,8 @@ release:
 deploy:
   stage: deploy
   image: alpine:3.18
-  script:
-    - apt-get update -y && apt-get install gettext openssh-client -y || true
-    - command -v ssh-agent >/dev/null
+  before_script:
+    - apk add openssh-client bash gettext
     - eval $(ssh-agent -s)
     - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
@@ -53,6 +53,8 @@ deploy:
     - chmod 644 ~/.ssh/known_hosts
     - ssh ${DEPLOY_USER}@${DEPLOY_HOST} "mkdir -p /tmp/${CI_PROJECT_DIR}/frontend/"
     - envsubst < ./frontend/deploy.sh|ssh ${DEPLOY_USER}@${DEPLOY_HOST}
+  script:
+    - echo "Deployment step is complete"
 
 semgrep-sast:
   stage: test
