@@ -13,7 +13,7 @@ RUN NODE_ENV=test VUE_APP_API_URL=http://std-030-78.praktikum-services.tech:8081
 
 
 # Stage 2: Serve the frontend with Nginx
-FROM nginxproxy/nginx-proxy:1.3.1-alpine
+FROM nginx:stable-alpine3.17-slim
 WORKDIR /app
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
 EXPOSE 80
