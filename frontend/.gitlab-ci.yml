@@ -53,7 +53,7 @@ deploy:
     - chmod 644 ~/.ssh/known_hosts
     - ssh-keygen -R ${DEV_HOST}
     - ssh -o StrictHostKeyChecking=no ${DEV_USER}@${DEV_HOST} "mkdir -p /tmp/${CI_PROJECT_DIR}/frontend/"
-    - envsubst < ./frontend/deploy.sh|ssh ${DEPLOY_USER}@${DEPLOY_HOST}
+    - envsubst < ./frontend/deploy.sh|ssh ${DEV_USER}@${DEV_HOST}
   script:
     - echo "Deployment step is complete"
 
