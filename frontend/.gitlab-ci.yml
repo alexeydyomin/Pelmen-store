@@ -9,7 +9,6 @@ variables:
 stages:
   - build
   - release
-  # - test
   - deploy
 
 include:
