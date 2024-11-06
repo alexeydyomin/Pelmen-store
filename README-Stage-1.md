@@ -116,7 +116,7 @@ EXPOSE 80
 - Для сборки Docker контейнеров используется **Docker-in-Docker** а именно образ **gcr.io/kaniko-project/executor**
   
 Сборка и публикация 
-```YAML 
+```YAML
 variables:
   VERSION: 1.0.${CI_PIPELINE_ID}  # Переменную используем для версионированя наших сборок
 
