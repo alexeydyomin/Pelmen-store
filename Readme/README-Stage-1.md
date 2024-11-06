@@ -186,7 +186,7 @@ sudo docker run -d --name momo-backend \
 ```
 ---
 - Проверка кода реализована с помощью **Sonarqube**.  
-Для frontend и backend добавлены стадии в gitlab-ci.yml:  
+Для **frontend** и **backend** добавлены стадии в gitlab-ci.yml:  
 ```yaml
 # Все переменные заведены в gitlab
 # Frontend
@@ -224,7 +224,7 @@ test:
   allow_failure: true
 ```
 
-- В результате получаем полноценные сборки наших сервисов для Пельменной ✌  
+- В результате получаем полноценные сборки наших сервисов для **Пельменной** ✌  
 
 *Frontend*
 ---
