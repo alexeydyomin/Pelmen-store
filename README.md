@@ -1,6 +1,7 @@
-# Momo Store aka Пельменная №2
+##  *Momo Store aka Пельменная №2*
+*Сделано пользователем *std-030-35@praktikum-services.ru* он же **Алексей Дёмин***
 
-<img width="900" alt="image" src="https://user-images.githubusercontent.com/9394918/167876466-2c530828-d658-4efe-9064-825626cc6db5.png">
+![My Momo Store](/images/Store-momo.png "My Momo Store")
 
 ## Frontend
 
@@ -14,4 +15,18 @@ NODE_ENV=production VUE_APP_API_URL=http://localhost:8081 npm run serve
 ```bash
 go run ./cmd/api
 go test -v ./... 
+```
+
+  
+
+## Backend
+
+  
+
+```bash
+
+go  run  ./cmd/api
+
+go  test  -v  ./...
+
 ```
