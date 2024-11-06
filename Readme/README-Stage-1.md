@@ -33,7 +33,7 @@ ___
 
 - Был создан главный **gitlab-ci.yml**, который находится в корне репозитория.
 
-```yaml
+```yml
 stages:
   - module-pipelines
 
@@ -66,7 +66,7 @@ backend:
 ##  *Backend* 🐳
 Сильно помогла инструкция - https://docs.docker.com/guides/golang/build-images/  
 
-```yaml
+```yml
 # Stage 1: Сборка backend - получаем бинарный файл.
 FROM golang:1.20 AS builder
 WORKDIR /app
@@ -87,7 +87,7 @@ CMD ["./api"]
 ##  *Frontend* 🐳
 
 
-```yaml
+```yml
 # Stage 1: Build the frontend
 FROM node:16.20.0-alpine3.18 AS builder
 WORKDIR /usr/src/app
@@ -116,7 +116,7 @@ EXPOSE 80
 - Для сборки Docker контейнеров используется **Docker-in-Docker** а именно образ **gcr.io/kaniko-project/executor**
   
 Сборка и публикация 
-```YAML
+```yml
 variables:
   VERSION: 1.0.${CI_PIPELINE_ID}  # Переменную используем для версионированя наших сборок
 
@@ -187,7 +187,7 @@ sudo docker run -d --name momo-backend \
 ---
 - Проверка кода реализована с помощью **Sonarqube**.  
 Для **frontend** и **backend** добавлены стадии в gitlab-ci.yml:  
-```yaml
+```yml
 # Все переменные заведены в gitlab
 # Frontend
 test:
