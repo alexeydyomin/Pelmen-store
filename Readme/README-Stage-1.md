@@ -185,6 +185,70 @@ sudo docker run -d --name momo-backend \
      "${CI_REGISTRY_IMAGE}"/momo-backend:$VERSION
 ```
 ---
+- Проверка кода реализована с помощью **Sonarqube**.  
+Для frontend и backend добавлены стадии в gitlab-ci.yml:  
+```yaml
+# Все переменные заведены в gitlab
+# Frontend
+test:
+  stage: test
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"
+    GIT_DEPTH: "0"
+  cache:
+    key: "${CI_COMMIT_REF_SLUG}-${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script:
+    - sonar-scanner -Dsonar.qualitygate.wait=true -Dsonar.projectKey=${SONAR_PROJECT_KEY_FRONTEND} -Dsonar.sources=frontend/ -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONAR_LOGIN_FRONTEND}
+  allow_failure: true
+
+# Backend
+test:
+  stage: test
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"
+    GIT_DEPTH: "0"
+  cache:
+    key: "${CI_COMMIT_REF_SLUG}-${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script:
+    - sonar-scanner -Dsonar.qualitygate.wait=true -Dsonar.projectKey=${SONAR_PROJECT_KEY_BACKEND} -Dsonar.sources=backend/ -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONAR_LOGIN_BACKEND}
+  allow_failure: true
+```
+
+- В результате получаем полноценные сборки наших сервисов для Пельменной ✌  
+
+*Frontend*
+---
+![pipeline-1](/images/pipeline-1.png "pipeline-1")  
+___  
+
+*Backend*
+---
+![pipeline-1](/images/pipeline-2.png "pipeline-1")  
+___  
+- И запущенные контейнеры на хосте в **Docker**  
+
+```student@fhm5gld0krvrcfvb53db:~$ docker ps
+CONTAINER ID   IMAGE                                                                               COMMAND                  CREATED         STATUS                  PORTS                                       NAMES
+f40d15a28e60   gitlab.praktikum-services.ru:5050/std-030-35/momo-store/momo-frontend:1.0.1623768   "/docker-entrypoint.…"   2 minutes ago   Up 2 minutes            0.0.0.0:80->80/tcp, :::80->80/tcp           momo-frontend
+4b69c71ef83d   gitlab.praktikum-services.ru:5050/std-030-35/momo-store/momo-backend:1.0.1623767    "./api"                  2 minutes ago   Up 2 minutes            0.0.0.0:8081->8081/tcp, :::8081->8081/tcp   momo-backend
+```  
+*Docker ps*
+---
+![pipeline-1](/images/Docker-ps.png "pipeline-1")  
+___  
+  
+
+
 - **В результате нам удалось выполнить все поставленные на первый этап задачи.** 👌💪 😎
 
 ✅  Код хранится в GitLab с использованием любого git-flow  
@@ -199,7 +263,4 @@ sudo docker run -d --name momo-backend \
 ✅ В GitLab CI описан шаг деплоя
   
 ---
- 
-
-
  
