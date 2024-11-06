@@ -19,5 +19,5 @@
 > * В GitLab CI описан шаг деплоя
 
 ---
-✅ Ссылка на инструкцию -  [Первая часть 🚀 ](blob:https://gitlab.praktikum-services.ru/412116ec-c79c-49db-a005-7960dbf8c791) 
+✅ Ссылка на инструкцию -  [Первая часть 🚀 ](blob:https://gitlab.praktikum-services.ru/std-030-35/momo-store/-/blob/main/README-Stage-1.md?ref_type=heads) 
 ---
