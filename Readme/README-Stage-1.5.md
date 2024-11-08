@@ -32,7 +32,7 @@
 
 Ошибки при планировании были такими:  
 
-```
+```yaml
 student@fhm5gld0krvrcfvb53db:~/terraform-momo$ terraform plan
 ╷
 │ Error: Provider produced invalid plan
