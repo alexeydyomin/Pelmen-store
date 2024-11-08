@@ -389,7 +389,32 @@ services:
 ![](/images/minio.png)
 
 ---
-<br> <br>
+<br> <br> 
 
+</div> 
+
+---  
+Полезные ссылки:  
+
+> - [Getting an IAM token for a Yandex account ](https://yandex.cloud/en/docs/iam/operations/iam-token/create)
+> - [ Начало работы с Terraform ](https://yandex.cloud/ru/docs/tutorials/infrastructure-management/terraform-quickstart#install-terraform)
+> - [Как начать работать с сервисными аккаунтами ](https://yandex.cloud/ru/docs/iam/quickstart-sa)
+> - [ Начало работы с интерфейсом командной строки ](https://yandex.cloud/ru/docs/cli/quickstart#install)
+> - [yandex_vpc_default_security_group ](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/vpc_default_security_group)
+> - [ yandex_vpc_security_group ](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/vpc_security_group)
+> - [yandex_vpc_network ](https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/vpc_network)
+> - [ Облачные сети и подсети ](https://yandex.cloud/ru/docs/vpc/concepts/network#network)
+> - [Метаданные виртуальной машины ](https://yandex.cloud/ru/docs/compute/concepts/vm-metadata#how-to-send-metadata)
+> - [ Cloud config examples ](https://docs.cloud-init.io/en/22.1/topics/examples.html#)
+> - [Группы безопасности ](https://yandex.cloud/ru/docs/vpc/concepts/security-groups)
+> - [ Yandex Cloud DNS ](https://yandex.cloud/ru/docs/dns/)
+> - [ Создать виртуальную машину из набора дисков ](hhttps://yandex.cloud/ru/docs/compute/operations/vm-create/create-from-disks)   
+
+
+<br> <br> 
+
+<div align="center">  
 
 ![alt text](/images/eralash.png) 
+
+</div> 
