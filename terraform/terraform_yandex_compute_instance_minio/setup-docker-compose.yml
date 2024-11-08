@@ -1,0 +1,46 @@
+---
+- name: Setup and run Docker Compose on remote host
+  hosts: all
+  become: true
+  tasks:
+    # - name: Wait for SSH to be available
+    #   wait_for:
+    #     host: "{{ inventory_hostname }}"
+    #     port: 22
+    #     state: started
+    #     timeout: 300 # Ожидаем 5 минут
+
+    - name: Create a directory for Minio Compose files
+      file:
+        path: "/home/student/minio"
+        state: directory
+        owner: student
+        group: student
+        mode: "0755"
+
+    - name: Copy minio-compose.yml to the remote machine
+      copy:
+        src: "minio-compose.yml"
+        dest: "/home/student/minio/minio-compose.yml"
+        owner: student
+        group: student
+        mode: "0644"
+
+    - name: Copy nginx.conf to the remote machine
+      copy:
+        src: "nginx.conf"
+        dest: "/home/student/minio/nginx.conf"
+        owner: student
+        group: student
+        mode: "0644"
+
+    - name: Change ownership of the files
+      file:
+        path: "/home/student/minio/minio-compose.yml"
+        owner: student
+        group: student
+
+    - name: Run Docker Compose
+      command:
+        cmd: "docker compose -f /home/student/minio/minio-compose.yml up -d"
+        chdir: "/home/student/minio"

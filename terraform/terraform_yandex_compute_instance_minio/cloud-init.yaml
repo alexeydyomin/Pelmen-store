@@ -1,0 +1,14 @@
+users:
+  - name: student
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+
+runcmd:
+  - mkdir -p /home/student/.ssh
+  - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCfhszg4mbsUViWDDRXSR79A9vdB30QXlJQUHKB1YwIH3FpoJahh2fByAxWmIpinqfcjcwdbp+HMA8veZ/Dq5ukOAkkfSnM2VUOd7SNir3TBrGQqgUjySjHwl5Nol7iZ7ffrg2F9EBqWLcuWS8yE6HAheBchC5iIgLnhFlkJU9SjDStviSktm8vp4pNzyBdAUyIMQ2e7OTXfofyg5wJETE+69x9LKtZvP/s8gx6oML4azJYdE+abXcsj8pfT55Yo3AYZ1qSBFzw2dDWYoBr81jXMpbgWIygh1oLX7B6JuAbN7dZ6N4+Gn+l4jk7TxTdQAlKZLAcr9oy5mvbtX64IIFSCro9N8+3ubAJEXqEyuolkri4eEpHnX4/xh4roowQuV2TgVmyWR/rlr6y/P9vWnDVip8PtfRHY6G9olQP0JPt2swGYr3dZYdkNlODQVE4mqwMpzBWBMFfnq9QiQoyttj9kvCKGVM5gndfEo17rpkDUE1m+6paBbZHuSfasOWO530= student@fhm5gld0krvrcfvb53db" > /home/student/.ssh/authorized_keys
+  - chown -R student:student /home/student/.ssh
+  - chmod 700 /home/student/.ssh
+  - chmod 600 /home/student/.ssh/authorized_keys
+  - apt update -y
+  - curl -sSL https://get.docker.com | sh
+  - usermod -aG docker student
