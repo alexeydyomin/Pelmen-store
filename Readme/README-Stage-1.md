@@ -5,7 +5,7 @@
 ##  *Momo Store aka Пельменная №2 &trade;*
 *Сделано пользователем *std-030-35@praktikum-services.ru* он же **Алексей Дёмин***
 
-</div>
+
 
 ---
 ![My Momo Store](/images/storemomo.png "My Momo Store")  
@@ -13,6 +13,8 @@ ___
 
 
 ## *Первый этап*
+
+</div>
 
 **Требования**:
 >
