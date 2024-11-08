@@ -408,7 +408,7 @@ services:
 > - [ Cloud config examples ](https://docs.cloud-init.io/en/22.1/topics/examples.html#)
 > - [Группы безопасности ](https://yandex.cloud/ru/docs/vpc/concepts/security-groups)
 > - [ Yandex Cloud DNS ](https://yandex.cloud/ru/docs/dns/)
-> - [ Создать виртуальную машину из набора дисков ](hhttps://yandex.cloud/ru/docs/compute/operations/vm-create/create-from-disks)   
+> - [ Создать виртуальную машину из набора дисков ](https://yandex.cloud/ru/docs/compute/operations/vm-create/create-from-disks)   
 
 
 <br> <br> 
