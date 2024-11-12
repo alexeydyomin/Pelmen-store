@@ -98,9 +98,9 @@ deploy:
     - echo ${VERSION}
     - echo ${CI_REGISTRY_IMAGE}
     - kubectl config set-context --current --namespace=default
-    - envsubst < kubernetes/backend/secrets.yaml | kubectl apply -f -
+    - kubectl apply -f kubernetes/backend/secrets.yaml
     - envsubst < kubernetes/backend/deployment.yaml | kubectl apply -f -
-    - envsubst < kubernetes/backend/service.yaml | kubectl apply -f -
-    - envsubst < kubernetes/backend/vpa.yaml | kubectl apply -f -
+    - kubectl apply -f kubernetes/backend/service.yaml
+    - kubectl apply -f kubernetes/backend/vpa.yaml
   after_script:
     - rm -f .kube/config

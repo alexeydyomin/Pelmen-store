@@ -99,11 +99,11 @@ deploy:
     - ls -la .kube/config
     - cat .kube/config
     - kubectl config set-context --current --namespace=default
-    - envsubst < kubernetes/frontend/configmap.yaml | kubectl apply -f -
-    - envsubst < kubernetes/frontend/secrets.yaml | kubectl apply -f -
+    - kubectl apply -f  kubernetes/frontend/configmap.yaml
+    - kubectl apply -f kubernetes/frontend/secrets.yaml
     - envsubst < kubernetes/frontend/deployment.yaml | kubectl apply -f -
-    - envsubst < kubernetes/frontend/service.yaml | kubectl apply -f -
-    - envsubst < kubernetes/frontend/ingress.yaml | kubectl apply -f -
+    - kubectl apply -f kubernetes/frontend/service.yaml
+    - kubectl apply -f kubernetes/frontend/ingress.yaml
   after_script:
     - rm -f ~/.kube/config
     
