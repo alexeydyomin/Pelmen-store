@@ -82,10 +82,20 @@ deploy:
     changes:
       - kubernetes/frontend/**/*
       - frontend/**/*
+  before_script:
+    - curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+    - sudo ln -s yandex-cloud/bin/yc /usr/bin/yc
+    - pwd
+    - ls -la
+    - ls -la yandex-cloud
+    - yc config profile create momo-alex
+    - yc config set token ${TOKEN} --profile momo-alex
+    - yc config set folder-id ${FOLDER_ID} --profile momo-alex
+    - yc config set cloud-id ${CLOUD_ID} --profile momo-alex
   script:
     - curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
     - pwd
-    - ls -la
+    - ls -la yandex-cloud
     - mkdir -p .kube
     # - cp ~/.kube/config ~/.kube/config.backup
     - echo "$KUBECONFIG_BASE64"
