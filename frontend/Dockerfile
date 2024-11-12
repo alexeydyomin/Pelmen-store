@@ -23,3 +23,4 @@ WORKDIR /app
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
 # COPY default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
+
