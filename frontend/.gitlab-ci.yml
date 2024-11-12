@@ -23,7 +23,7 @@ build:
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}/frontend"
       --dockerfile "${CI_PROJECT_DIR}/frontend/Dockerfile"
-      --destination "${CI_REGISTRY_IMAGE}/momo-frontend:$CI_COMMIT_SHA"
+      --destination "${CI_REGISTRY_IMAGE}/frontend:$CI_COMMIT_SHA"
       --build-arg VERSION=$VERSION
       --cache=true
 
@@ -38,7 +38,7 @@ release:
   before_script:
     - crane auth login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    - crane tag $CI_REGISTRY_IMAGE/momo-frontend:$CI_COMMIT_SHA $VERSION
+    - crane tag $CI_REGISTRY_IMAGE/frontend:$CI_COMMIT_SHA $VERSION
 
 test:
   stage: test
