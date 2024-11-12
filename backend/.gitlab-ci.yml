@@ -7,7 +7,6 @@ stages:
   - test
   - deploy
 
-
 build:
   stage: build
   image:
@@ -50,19 +49,54 @@ test:
     - sonar-scanner -Dsonar.qualitygate.wait=true -Dsonar.projectKey=${SONAR_PROJECT_KEY_BACKEND} -Dsonar.sources=backend/ -Dsonar.host.url=${SONARQUBE_URL} -Dsonar.login=${SONAR_LOGIN_BACKEND}
   allow_failure: true
 
+# Стадия актуальна для деплоя docker контейнеров
+# deploy:
+#   stage: deploy
+#   image: alpine:3.18
+#   before_script:
+#     - apk add openssh-client bash gettext
+#     - eval $(ssh-agent -s)
+#     - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
+#     - mkdir -p ~/.ssh
+#     - chmod 700 ~/.ssh
+#     - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+#     - chmod 644 ~/.ssh/known_hosts
+#     - ssh-keygen -R ${DEV_HOST}
+#     - ssh -o StrictHostKeyChecking=no ${DEV_USER}@${DEV_HOST} "mkdir -p /tmp/${CI_PROJECT_DIR}/backend/"
+#     - envsubst < ./backend/deploy.sh|ssh ${DEV_USER}@${DEV_HOST}
+#   script:
+#     - echo "Deployment step is complete"
+
 deploy:
   stage: deploy
-  image: alpine:3.18
+  image: alpine/k8s:1.28.14
+  environment:
+    name: Kubernetes/backend
+    url: http://vm.momo-store.cloud-ip.biz
+  only:
+    changes:
+      - kubernetes/backend/**/*
+      - backend/**/*
   before_script:
-    - apk add openssh-client bash gettext
-    - eval $(ssh-agent -s)
-    - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-    - ssh-keygen -R ${DEV_HOST}
-    - ssh -o StrictHostKeyChecking=no ${DEV_USER}@${DEV_HOST} "mkdir -p /tmp/${CI_PROJECT_DIR}/backend/"
-    - envsubst < ./backend/deploy.sh|ssh ${DEV_USER}@${DEV_HOST}
+    - apk add gettext
   script:
-    - echo "Deployment step is complete"
+    - pwd
+    - ls -la
+    - mkdir -p .kube
+    # - cp ~/.kube/config ~/.kube/config.backup
+    - echo "$KUBECONFIG_BASE64"
+    - echo "$KUBECONFIG_BASE64" | base64 -d > .kube/config
+    - export KUBECONFIG=.kube/config
+    - ls -la .kube/config
+    - cat .kube/config
+    - printenv
+    - echo ${VERSION}
+    - echo ${CI_REGISTRY_IMAGE}
+    # - kubectl apply -f kubernetes/backend/configmap.yaml
+    - envsubst < kubernetes/backend/secrets.yaml | kubectl apply -f -
+    - envsubst < kubernetes/backend/deployment.yaml | kubectl apply -f -
+    - envsubst < kubernetes/backend/service.yaml | kubectl apply -f -
+    - envsubst < kubernetes/backend/vpa.yaml | kubectl apply -f -
+    # - kubectl apply -f kubernetes/backend/ingress.yaml
+  after_script:
+    - rm -f .kube/config

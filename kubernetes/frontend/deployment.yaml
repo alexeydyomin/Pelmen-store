@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  revisionHistoryLimit: 15
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          # image: gitlab.praktikum-services.ru:5050/std-030-35/momo-store/frontend:1.0.1635969
+          image: ${CI_REGISTRY_IMAGE}/frontend:${VERSION}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: frontend
+              containerPort: 80
+          volumeMounts:
+            - name: nginx-config-volume
+              mountPath: /etc/nginx/conf.d/nginx.conf
+              subPath: nginx.conf
+          resources:
+            limits:
+              cpu: "0.2"
+              memory: 512Mi
+            requests:
+              cpu: "0.1"
+              memory: 128Mi
+      volumes:
+        - name: nginx-config-volume
+          configMap:
+            name: nginx-conf
+      imagePullSecrets:
+        - name: docker-config-secret
