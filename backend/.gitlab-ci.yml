@@ -80,10 +80,10 @@ deploy:
   before_script:
     - apk add gettext
   script:
+    - curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
     - pwd
     - ls -la
     - mkdir -p .kube
-    # - cp ~/.kube/config ~/.kube/config.backup
     - echo "$KUBECONFIG_BASE64"
     - echo "$KUBECONFIG_BASE64" | base64 -d > .kube/config
     - export KUBECONFIG=.kube/config
@@ -92,11 +92,9 @@ deploy:
     - printenv
     - echo ${VERSION}
     - echo ${CI_REGISTRY_IMAGE}
-    # - kubectl apply -f kubernetes/backend/configmap.yaml
     - envsubst < kubernetes/backend/secrets.yaml | kubectl apply -f -
     - envsubst < kubernetes/backend/deployment.yaml | kubectl apply -f -
     - envsubst < kubernetes/backend/service.yaml | kubectl apply -f -
     - envsubst < kubernetes/backend/vpa.yaml | kubectl apply -f -
-    # - kubectl apply -f kubernetes/backend/ingress.yaml
   after_script:
     - rm -f .kube/config

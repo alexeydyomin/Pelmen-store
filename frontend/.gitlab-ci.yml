@@ -83,6 +83,7 @@ deploy:
       - kubernetes/frontend/**/*
       - frontend/**/*
   script:
+    - curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
     - pwd
     - ls -la
     - mkdir -p .kube
