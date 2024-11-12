@@ -4,9 +4,10 @@ WORKDIR /usr/src/app
 COPY . .
 
 # VUE_APP_BASE_URL=http://std-030-78.praktikum-services.tech/  - заменить на свою dns запись
-ENV VUE_APP_BASE_URL=http://std-030-35.k8s.praktikum-services.tech/
+ENV VUE_APP_BASE_URL=http://std-030-78.praktikum-services.tech/
 ENV NODE_ENV=test
-ENV VUE_APP_API_URL=http://std-030-35.k8s.praktikum-services.tech:8081
+ENV VUE_APP_API_URL=http://std-030-78.praktikum-services.tech:8081
+
 
 RUN npm install
 
