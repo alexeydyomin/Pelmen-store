@@ -93,12 +93,12 @@ deploy:
     - yc config set cloud-id ${CLOUD_ID} --profile momo-alex
   script:
     - mkdir -p .kube
-    # - cp ~/.kube/config ~/.kube/config.backup
     - echo "$KUBECONFIG_BASE64"
     - echo "$KUBECONFIG_BASE64" | base64 -d > .kube/config
     - export KUBECONFIG=.kube/config
     - ls -la .kube/config
     - cat .kube/config
+    - kubectl config set-context --current --namespace=default
     - envsubst < kubernetes/frontend/configmap.yaml | kubectl apply -f -
     - envsubst < kubernetes/frontend/secrets.yaml | kubectl apply -f -
     - envsubst < kubernetes/frontend/deployment.yaml | kubectl apply -f -

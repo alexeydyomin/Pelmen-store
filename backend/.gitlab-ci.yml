@@ -79,10 +79,15 @@ deploy:
       - backend/**/*
   before_script:
     - apk add gettext
-  script:
     - curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+    - ln -s /root/yandex-cloud/bin/yc /usr/bin/yc
     - pwd
     - ls -la
+    - yc config profile create momo-alex
+    - yc config set token ${TOKEN} --profile momo-alex
+    - yc config set folder-id ${FOLDER_ID} --profile momo-alex
+    - yc config set cloud-id ${CLOUD_ID} --profile momo-alex
+  script:
     - mkdir -p .kube
     - echo "$KUBECONFIG_BASE64"
     - echo "$KUBECONFIG_BASE64" | base64 -d > .kube/config
@@ -92,6 +97,7 @@ deploy:
     - printenv
     - echo ${VERSION}
     - echo ${CI_REGISTRY_IMAGE}
+    - kubectl config set-context --current --namespace=default
     - envsubst < kubernetes/backend/secrets.yaml | kubectl apply -f -
     - envsubst < kubernetes/backend/deployment.yaml | kubectl apply -f -
     - envsubst < kubernetes/backend/service.yaml | kubectl apply -f -
