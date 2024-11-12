@@ -4,9 +4,9 @@ WORKDIR /usr/src/app
 COPY . .
 
 # VUE_APP_BASE_URL=http://std-030-78.praktikum-services.tech/  - заменить на свою dns запись
-# ENV VUE_APP_BASE_URL=https://vm.momo-store.cloud-ip.biz/
-# ENV NODE_ENV=test
-# ENV VUE_APP_API_URL=https://vm.momo-store.cloud-ip.biz:8081
+ENV VUE_APP_BASE_URL=https://vm.momo-store.cloud-ip.biz/
+ENV NODE_ENV=test
+ENV VUE_APP_API_URL=http://vm.momo-store.cloud-ip.biz:8081
 
 
 RUN npm install
