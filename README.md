@@ -105,6 +105,8 @@
 
 <br>
 
+<br>
+
 <div align="center">  
 
 ❸ Этап
