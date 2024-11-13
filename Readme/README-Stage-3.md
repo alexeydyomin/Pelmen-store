@@ -171,7 +171,7 @@ data:
 
 - Домен был зарегистсрован на бесплатной площалке - https://www.cloudns.net/ 
 
-![](/images/cloud.png)  
+![](/images/cloud11.png) 
 
 ---  
 
