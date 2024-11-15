@@ -194,6 +194,6 @@
 
 **Ну и кстати, я был довольно экономен с ресурсами.**  
 
-![](/images/babosiki.jpg) 
+![](/images/babosiki.png) 
 
 </div> 
