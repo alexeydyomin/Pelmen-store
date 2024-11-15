@@ -3,9 +3,9 @@
 ![](/images/logo.png) 
 
 ##  *Momo Store aka Пельменная №2 &trade;*
-*Сделано пользователем *std-030-35@praktikum-services.ru* он же **Алексей Дёмин***
+*Сделано пользователем *std-030-35* он же **Алексей Дёмин***
 
-
+Адрес пельменной  - https://vm.momo-store.cloud-ip.biz/
 
 ---
 ![My Momo Store](/images/storemomo.png "My Momo Store")  
