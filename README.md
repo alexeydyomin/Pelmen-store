@@ -176,7 +176,7 @@
 <div align="center"> 
 
 ---  
-> ✅ Ссылка на инструкцию -  *[Пятуя часть 🚀🚀🚀 ](./Readme/README-Stage-5.md)*  
+> ✅ Ссылка на инструкцию -  *[Пятая часть 🚀🚀🚀 ](./Readme/README-Stage-5.md)*  
 ---
 
 <br><br>
