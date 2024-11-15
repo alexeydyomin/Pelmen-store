@@ -1,0 +1,68 @@
+---
+##############################################################################################################
+# Frontend
+
+# service.yaml
+frontend:
+  service:
+    name: frontend
+    port: 80
+
+  # ingress.yaml
+  ingress:
+    enabled: true
+    host: "vm.momo-store.cloud-ip.biz"
+    tls:
+      enabled: true
+      secretName: "momo-store-tls"
+
+  # deployment.yaml
+  replicaCount: 1
+
+  image:
+    repository: gitlab.praktikum-services.ru:5050/std-030-35/momo-store/frontend
+    tag: "1.0.1636715"
+    pullPolicy: IfNotPresent
+
+##############################################################################################################
+# Backend
+
+backend:
+  # service.yaml
+  service:
+    name: backend
+    port: 8081
+
+  # vpa.yaml
+  vpa:
+    name: backend
+
+  updatePolicy:
+    updateMode:
+      name: Initial
+
+  resourcePolicy:
+    minAllowed:
+      cpu: 0
+      memory: 0Mi
+    maxAllowed:
+      cpu: 1
+      memory: 500Mi
+
+  controlledValues: RequestsAndLimits
+
+  # deployment.yaml
+  replicas: 1
+  revisionHistoryLimit: 15
+
+  strategy:
+    type: RollingUpdate
+    maxUnavailable: 1
+    maxSurge: 20%
+
+  image:
+    repository: gitlab.praktikum-services.ru:5050/std-030-35/momo-store/backend
+    tag: "1.0.1636714"
+    pullPolicy: IfNotPresent
+
+  containerPort: 8081
